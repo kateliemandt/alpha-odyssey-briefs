@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Alpha Odyssey · Briefs</title>
+<meta name="description" content="The full-length brief for every Alpha Odyssey workshop, physical challenge, and mastery side quest — one at a time, with room to breathe." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Cardo:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   ALPHA ODYSSEY · BRIEFS — editorial long-form, one brief per page
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --navy: #0b1d2c;
+  --navy-2: #132a3d;
+  --ink: #f3e9cf;
+  --ink-dim: #d9cdb0;
+  --ink-faint: #8e8872;
+  --cream: #f3e9cf;
+  --parchment: #ece0bf;
+  --gold: #c9a34a;
+  --gold-deep: #a07d32;
+  --wine: #7a1e23;
+  --wine-rose: #e5a7ab;
+  --rule: #2a4257;
+  --rule-light: rgba(201, 163, 74, 0.25);
+  --font-display: "Young Serif", "Cardo", Georgia, serif;
+  --font-body:    "Cardo", Georgia, serif;
+  --font-mono:    "JetBrains Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--navy);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--rule-light); transition: color .2s, border-color .2s; }
+a:hover { color: var(--cream); border-bottom-color: var(--gold); }
+
+/* ───────── Layout: drawer + canvas ───────── */
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 960px) { .app { grid-template-columns: 1fr; } }
+
+/* ───────── Sidebar nav ───────── */
+aside.drawer {
+  background: #091724;
+  border-right: 1px solid var(--rule);
+  padding: 32px 22px 80px;
+  position: sticky; top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+aside.drawer::-webkit-scrollbar { width: 6px; }
+aside.drawer::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+@media (max-width: 960px) {
+  aside.drawer {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 320px;
+    z-index: 100; transform: translateX(-100%);
+    transition: transform .3s;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.4);
+  }
+  aside.drawer.open { transform: translateX(0); }
+}
+.brand {
+  padding-bottom: 20px; border-bottom: 1px solid var(--rule);
+  margin-bottom: 20px;
+}
+.brand .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.28em;
+  color: var(--gold); text-transform: uppercase;
+}
+.brand h1 {
+  font-family: var(--font-display);
+  font-size: 32px; line-height: 1; letter-spacing: -0.01em;
+  color: var(--cream); margin-top: 6px; font-weight: 400;
+}
+.brand h1 em { color: var(--gold); font-style: italic; }
+.brand .tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-dim);
+  padding: 3px 8px;
+  border: 1px solid var(--rule-light);
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+.nav-filter {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.nav-filter button {
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-dim);
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 5px 9px; cursor: pointer;
+  border-radius: 2px;
+}
+.nav-filter button:hover { color: var(--cream); border-color: var(--gold); }
+.nav-filter button.on { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+.nav-group {
+  margin-bottom: 22px;
+}
+.nav-group-head {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 8px 0 6px;
+  border-bottom: 1px dotted var(--rule);
+  margin-bottom: 6px;
+}
+.nav-group-head .wk {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--gold);
+  line-height: 1;
+}
+.nav-group-head .wt {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-dim);
+  font-style: italic;
+}
+.nav-group .sub {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 10px 0 4px 0;
+}
+.nav-link {
+  display: block;
+  padding: 6px 10px 6px 12px;
+  font-size: 14px;
+  color: var(--ink-dim);
+  border-left: 2px solid transparent;
+  border-bottom: 0;
+  line-height: 1.35;
+}
+.nav-link:hover { color: var(--cream); border-left-color: var(--gold-deep); }
+.nav-link.active {
+  color: var(--gold);
+  border-left-color: var(--gold);
+  background: rgba(201,163,74,0.06);
+}
+.nav-link .level {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-faint); display: block; margin-bottom: 1px;
+}
+.nav-link.active .level { color: var(--gold-deep); }
+
+/* ───────── Canvas ───────── */
+main.canvas {
+  padding: 56px clamp(24px, 5vw, 72px) 96px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.hamburger {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 101;
+  background: var(--navy); border: 1px solid var(--gold); color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 10px 14px; cursor: pointer; border-radius: 2px;
+}
+@media (max-width: 960px) {
+  .hamburger { display: inline-block; }
+  main.canvas { padding-top: 80px; }
+}
+
+/* ───────── Landing ───────── */
+.landing .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px;
+}
+.landing h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 108px); line-height: 0.95;
+  font-weight: 400; color: var(--cream);
+  letter-spacing: -0.01em;
+  max-width: 16ch;
+}
+.landing h1 em { font-style: italic; color: var(--gold); }
+.landing .lede {
+  max-width: 58ch;
+  margin-top: 28px;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink-dim);
+  line-height: 1.58;
+}
+.landing .stats {
+  margin-top: 36px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  max-width: 780px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 0;
+}
+.landing .stat { }
+.landing .stat .n {
+  font-family: var(--font-display);
+  font-size: 42px; color: var(--gold); line-height: 1;
+}
+.landing .stat .l {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink-faint); margin-top: 4px;
+}
+
+.landing-list {
+  margin-top: 48px;
+}
+.landing-list h2 {
+  font-family: var(--font-display);
+  font-size: 30px; color: var(--cream); font-weight: 400; line-height: 1.1;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+.landing-list h2 small {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px;
+}
+.landing-list .sub {
+  font-style: italic; color: var(--ink-dim); margin-bottom: 18px;
+  max-width: 68ch;
+}
+.ll-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 36px;
+}
+.ll-card {
+  background: #0b1f30;
+  padding: 22px 22px 20px;
+  transition: background .15s;
+  cursor: pointer;
+  display: block;
+  border: 0;
+}
+.ll-card:hover { background: #132a3d; }
+.ll-card .meta {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.ll-card .meta span { padding: 2px 7px; border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-faint); }
+.ll-card .meta .lvl { color: var(--gold); border-color: var(--gold); }
+.ll-card .meta .wk  { color: var(--ink-dim); }
+.ll-card .meta .phy { color: var(--wine-rose); background: rgba(122,30,35,0.2); border-color: rgba(122,30,35,0.5); }
+.ll-card .t {
+  font-family: var(--font-display);
+  font-size: 22px; line-height: 1.12; color: var(--cream);
+  margin-bottom: 6px;
+}
+.ll-card .tl { font-size: 14px; color: var(--ink-dim); font-style: italic; }
+
+/* ───────── Brief layout ───────── */
+article.brief {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 48px;
+}
+@media (max-width: 1080px) {
+  article.brief { grid-template-columns: minmax(0, 1fr); }
+  aside.rail { position: static !important; margin-top: 24px; }
+}
+
+.brief-body {
+  min-width: 0; /* allow text wrap */
+  font-size: 20px; line-height: 1.7;
+}
+.crumb {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  align-items: center;
+}
+.crumb .sep { color: var(--rule); }
+.crumb .wk { color: var(--gold); }
+.crumb .lvl { color: var(--ink-dim); }
+.crumb .trk { color: var(--ink-dim); }
+
+.brief-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.brief-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.02;
+  color: var(--cream);
+  font-weight: 400; letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+.brief-activity {
+  font-style: italic;
+  font-size: 20px; color: var(--gold);
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 24px;
+}
+.brief-tagline {
+  font-family: var(--font-display);
+  font-size: 28px; line-height: 1.3;
+  color: var(--ink);
+  font-style: italic;
+  max-width: 32ch;
+  margin-bottom: 40px;
+}
+
+/* Narrative block — the centerpiece */
+.narrative-block {
+  margin: 0 0 48px;
+  font-size: 22px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 66ch;
+}
+.narrative-block::first-letter {
+  font-family: var(--font-display);
+  font-size: 7em;
+  float: left;
+  line-height: 0.82;
+  padding: 10px 18px 0 0;
+  color: var(--gold);
+}
+.narrative-block p + p { margin-top: 1.2em; }
+
+.section {
+  margin: 56px 0 24px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1.05;
+  color: var(--cream); font-weight: 400;
+  margin-bottom: 22px;
+  letter-spacing: -0.005em;
+}
+
+/* Day plan — magazine timeline */
+ol.days {
+  list-style: none; counter-reset: d;
+  border-left: 1px solid var(--rule);
+  padding-left: 28px;
+  max-width: 66ch;
+}
+ol.days li {
+  counter-increment: d;
+  padding: 20px 0;
+  border-top: 1px dotted var(--rule);
+  position: relative;
+}
+ol.days li:first-child { border-top: 0; padding-top: 8px; }
+ol.days li::before {
+  content: counter(d);
+  position: absolute; left: -44px; top: 18px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--navy);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 16px; color: var(--gold); line-height: 1;
+}
+ol.days .d-meta {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 4px;
+}
+ol.days .d-title {
+  font-family: var(--font-display);
+  font-size: 24px; color: var(--cream); line-height: 1.15; margin-bottom: 6px;
+}
+ol.days .d-detail {
+  font-size: 17px; color: var(--ink-dim); line-height: 1.55;
+}
+
+/* Pass/fail block — prominent */
+.pass-block {
+  margin: 40px 0 24px;
+  padding: 28px 32px;
+  background: rgba(122,30,35,0.18);
+  border: 1px solid var(--wine);
+  border-left: 4px solid var(--wine-rose);
+  max-width: 66ch;
+}
+.pass-block .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--wine-rose); margin-bottom: 8px;
+}
+.pass-block h3 {
+  font-family: var(--font-display);
+  font-size: 28px; line-height: 1.1;
+  color: var(--cream); font-weight: 400; margin-bottom: 12px;
+}
+.pass-block p { font-size: 19px; font-style: italic; color: var(--ink); }
+
+/* Hooks */
+.hooks-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  margin: 36px 0 24px;
+  max-width: 66ch;
+}
+@media (max-width: 640px) { .hooks-row { grid-template-columns: 1fr; } }
+.hook-card {
+  padding: 22px;
+  border: 1px dashed var(--rule);
+  background: rgba(243,233,207,0.02);
+}
+.hook-card .lbl {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.hook-card p { font-size: 17px; line-height: 1.52; color: var(--ink-dim); }
+
+/* Bulleted lists */
+ul.bullets {
+  list-style: none;
+  max-width: 66ch;
+}
+ul.bullets li {
+  padding-left: 26px;
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+ul.bullets li::before {
+  content: "◆";
+  position: absolute; left: 0; top: 2px;
+  color: var(--gold); font-size: 11px;
+}
+
+/* Right rail */
+aside.rail {
+  position: sticky;
+  top: 40px;
+  align-self: start;
+  padding: 24px;
+  border: 1px solid var(--rule);
+  background: rgba(243,233,207,0.025);
+  font-size: 14px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+aside.rail .block { margin-bottom: 18px; padding-bottom: 16px; border-bottom: 1px dotted var(--rule); }
+aside.rail .block:last-child { border-bottom: 0; margin-bottom: 0; }
+aside.rail .k {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+aside.rail .v {
+  color: var(--ink-dim); font-size: 14px; line-height: 1.5;
+}
+aside.rail ul { list-style: none; }
+aside.rail ul li { padding: 4px 0 4px 14px; position: relative; }
+aside.rail ul li::before { content: "·"; position: absolute; left: 0; top: 2px; color: var(--gold); }
+
+/* Prev/Next nav */
+.pn-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  max-width: 66ch;
+}
+@media (max-width: 640px) { .pn-nav { grid-template-columns: 1fr; } }
+.pn {
+  padding: 18px; border: 1px solid var(--rule); cursor: pointer;
+  color: var(--ink-dim);
+  transition: border-color .2s, color .2s;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+.pn:hover { border-color: var(--gold); color: var(--cream); }
+.pn[data-disabled="true"] { opacity: 0.3; pointer-events: none; }
+.pn .dir {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.pn .t { font-family: var(--font-display); font-size: 20px; color: var(--cream); line-height: 1.15; }
+.pn-next { text-align: right; }
+
+/* Side quest-specific */
+.sq-quote {
+  margin: 28px 0;
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  background: rgba(201,163,74,0.06);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.55;
+  max-width: 66ch;
+}
+.sq-quote::before {
+  content: "“"; font-family: var(--font-display); font-size: 42px;
+  color: var(--gold); line-height: 0; vertical-align: -0.2em; margin-right: 6px;
+}
+.sq-quote::after {
+  content: "”"; font-family: var(--font-display); font-size: 42px;
+  color: var(--gold); line-height: 0; vertical-align: -0.2em; margin-left: 4px;
+}
+.sq-tier-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--rule); border-radius: 2px;
+  margin-right: 8px;
+}
+.sq-tier-pill.sprint  { color: #a4d4a4; border-color: rgba(164,212,164,0.6); }
+.sq-tier-pill.voyage  { color: #9abfe2; border-color: rgba(154,191,226,0.6); }
+.sq-tier-pill.quest   { color: var(--gold); border-color: var(--gold); }
+.sq-tier-pill.odyssey { color: var(--wine-rose); border-color: rgba(229,167,171,0.7); background: rgba(122,30,35,0.18); }
+
+/* Scroll-to-top + overview link */
+.util-row {
+  position: fixed; bottom: 20px; right: 20px;
+  display: flex; gap: 10px; z-index: 50;
+}
+.util-btn {
+  background: var(--navy); border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 9px 13px; cursor: pointer;
+  border-radius: 2px; text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+.util-btn:hover { background: var(--gold); color: var(--navy); }
+
+@keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+article.brief, section.landing { animation: fade .45s ease both; }
+
+/* Footer */
+.colophon {
+  margin-top: 64px; padding: 36px 0;
+  text-align: left;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint); font-size: 13px;
+  font-family: var(--font-mono); letter-spacing: 0.2em; text-transform: uppercase;
+  max-width: 66ch;
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" onclick="document.querySelector('aside.drawer').classList.toggle('open')">☰ Index</button>
+
+<div class="app">
+  <aside class="drawer" id="drawer">
+    <div class="brand">
+      <div class="eyebrow">Alpha Odyssey · Summer 2026</div>
+      <h1>The <em>Briefs</em></h1>
+      <span class="tag">Long-form · One brief at a time</span>
+    </div>
+
+    <div class="nav-filter" id="nav-filter"><!-- filled by JS --></div>
+    <div id="nav-list"><!-- filled by JS --></div>
+  </aside>
+
+  <main class="canvas" id="canvas">
+    <!-- Landing or brief rendered here -->
+  </main>
+</div>
+
+<div class="util-row">
+  <a class="util-btn" href="../site/index.html">↗ Overview</a>
+  <button class="util-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+</div>
+
+<script>window.ODYSSEY = { weeks: [], sideQuests: [] };</script>
+<script src="data/week1.js"></script>
+<script src="data/week2.js"></script>
+<script src="data/week3.js"></script>
+<script src="data/week4.js"></script>
+<script src="data/week5.js"></script>
+<script src="data/week6.js"></script>
+<script src="data/week7.js"></script>
+<script src="data/week8.js"></script>
+<script src="data/week9.js"></script>
+<script src="data/sidequests.js"></script>
+
+<script>
+/* ───── Normalization (same helpers as overview) ───── */
+function normalizeLevel(lv){if(!lv)return"";const m=String(lv).trim();if(m.startsWith("K"))return"K–1st";if(m==="2nd-3rd"||m==="2nd–3rd")return"2nd–3rd";if(m==="4th-5th"||m==="4th–5th")return"4th–5th";if(m==="6th-8th"||m==="6th–8th")return"6th–8th";return m;}
+function normalizeTrack(t){if(!t)return"weekly";return String(t).toLowerCase().includes("physical")?"physical":"weekly";}
+function normalizeDayPlan(dp){if(!dp)return[];if(Array.isArray(dp))return dp.map((it,i)=>{if(typeof it==="string"){const m=it.match(/^\s*(?:Day\s*\d+|Monday|Tuesday|Wednesday|Thursday|Friday)\s*[:.\-—]\s*(.*)$/i);const rest=m?m[1]:it;const hm=rest.match(/^([^—\-.:]{3,40})\s*[—\-:]\s*(.+)$/);if(hm)return{day:i+1,title:hm[1].trim(),detail:hm[2].trim()};return{day:i+1,title:"",detail:rest};}if(it&&typeof it==="object")return{day:typeof it.day==="number"?it.day:i+1,title:it.title||"",detail:it.detail||""};return{day:i+1,title:"",detail:String(it)};});if(typeof dp==="object"){const o=["monday","tuesday","wednesday","thursday","friday"];return o.filter(k=>dp[k]).map((k,i)=>{const raw=dp[k];const hm=String(raw).match(/^([^—\-.:]{3,40})\s*[—\-:]\s*(.+)$/);if(hm)return{day:i+1,title:hm[1].trim(),detail:hm[2].trim()};return{day:i+1,title:"",detail:String(raw)};});}return[];}
+function normalizeInstructors(i){if(Array.isArray(i))return i.join(" · ");return String(i||"");}
+function normalizeMaterials(m){if(!m)return[];if(Array.isArray(m))return m;return[String(m)];}
+
+/* ───── DOM helper ───── */
+function el(tag, attrs, ...kids){const e=document.createElement(tag);if(attrs)for(const k in attrs){if(k==="class")e.className=attrs[k];else if(k==="html")e.innerHTML=attrs[k];else if(k.startsWith("on"))e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;if(Array.isArray(c))c.forEach(x=>x!=null&&e.appendChild(typeof x==="string"?document.createTextNode(x):x));else e.appendChild(typeof c==="string"?document.createTextNode(c):c);}return e;}
+
+/* ───── Index building ───── */
+let INDEX = []; // flat list of {kind, id, week, track, level, title, tagline, entry?}
+let FILTER = "all"; // all | weekly | physical | sidequest
+
+function buildIndex(){
+  INDEX = [];
+  ODYSSEY.weeks.forEach(w=>{
+    (w.entries||[]).forEach(e=>{
+      INDEX.push({
+        kind: normalizeTrack(e.track),
+        id: e.id,
+        week: w.week,
+        weekTitle: w.theme_title,
+        track: normalizeTrack(e.track),
+        level: e.level,
+        levelGrade: normalizeLevel(e.level_grade),
+        choice: e.choice,
+        title: e.title,
+        tagline: e.tagline,
+        entry: e,
+        weekNotes: w.notes,
+        themeSubtitle: w.theme_subtitle
+      });
+    });
+  });
+  (ODYSSEY.sideQuests||[]).forEach(q=>{
+    INDEX.push({
+      kind: "sidequest",
+      id: q.id,
+      title: q.title,
+      level: q.level,
+      levelGrade: normalizeLevel(q.level_grade),
+      tier: q.tier,
+      tagline: q.tagline,
+      entry: q
+    });
+  });
+}
+function findById(id){ return INDEX.find(x => x.id === id); }
+
+/* ───── Sidebar ───── */
+function renderNav(){
+  const filterEl = document.getElementById("nav-filter");
+  filterEl.innerHTML = "";
+  [["all","All"],["weekly","Weekly"],["physical","Physical"],["sidequest","Side Quests"]].forEach(([k,l])=>{
+    const b = el("button", { class: FILTER===k?"on":"", onclick: ()=>{ FILTER=k; renderNav(); } }, l);
+    filterEl.appendChild(b);
+  });
+
+  const list = document.getElementById("nav-list");
+  list.innerHTML = "";
+
+  if (FILTER === "sidequest") {
+    renderSideQuestNav(list);
+    return;
+  }
+
+  ODYSSEY.weeks.forEach(w=>{
+    const entries = (w.entries||[]).filter(e=>{
+      if (FILTER === "all") return true;
+      return normalizeTrack(e.track) === FILTER;
+    });
+    if (!entries.length) return;
+    const group = el("div", { class: "nav-group" });
+    group.appendChild(el("div", { class: "nav-group-head" },
+      el("span", { class: "wk" }, String(w.week).padStart(2,"0")),
+      el("span", { class: "wt" }, w.theme_title)
+    ));
+    const weekly = entries.filter(e=>normalizeTrack(e.track)==="weekly");
+    const physical = entries.filter(e=>normalizeTrack(e.track)==="physical");
+    if (weekly.length) {
+      group.appendChild(el("div", { class: "sub" }, "Weekly"));
+      sortByLevel(weekly).forEach(e=>group.appendChild(navLink(e, w)));
+    }
+    if (physical.length) {
+      group.appendChild(el("div", { class: "sub" }, "Physical"));
+      sortByLevel(physical).forEach(e=>group.appendChild(navLink(e, w)));
+    }
+    list.appendChild(group);
+  });
+  highlightActive();
+}
+function renderSideQuestNav(list){
+  ["WonderLab","L1","L2","MS"].forEach(lv=>{
+    const items = (ODYSSEY.sideQuests||[]).filter(q=>q.level===lv);
+    if (!items.length) return;
+    const group = el("div", { class: "nav-group" });
+    const head = el("div", { class: "nav-group-head" });
+    head.appendChild(el("span", { class: "wk" }, lv === "WonderLab" ? "WL" : lv));
+    head.appendChild(el("span", { class: "wt" }, ({WonderLab:"K–1st",L1:"2nd–3rd",L2:"4th–5th",MS:"6th–8th"})[lv]));
+    group.appendChild(head);
+    items.forEach(q=>{
+      const a = el("a", { class: "nav-link", href: "#/q/"+q.id });
+      a.appendChild(el("span", { class: "level" }, q.tier + (q.time ? " · " + q.time : "")));
+      a.appendChild(document.createTextNode(q.title));
+      group.appendChild(a);
+    });
+    list.appendChild(group);
+  });
+  highlightActive();
+}
+function sortByLevel(entries) {
+  const order = { WonderLab:1, L1:2, L2:3, MS:4 };
+  return [...entries].sort((a,b)=>{
+    const la=order[a.level]||9, lb=order[b.level]||9;
+    if (la !== lb) return la - lb;
+    return (a.choice||"").localeCompare(b.choice||"");
+  });
+}
+function navLink(e, w){
+  const a = el("a", { class: "nav-link", href: "#/b/"+e.id });
+  a.appendChild(el("span", { class: "level" },
+    e.level + " · " + normalizeLevel(e.level_grade) + (e.choice ? " · Choice "+e.choice : "")
+  ));
+  a.appendChild(document.createTextNode(e.title));
+  return a;
+}
+function highlightActive() {
+  const hash = location.hash;
+  document.querySelectorAll(".nav-link").forEach(a=>{
+    a.classList.toggle("active", a.getAttribute("href") === hash);
+  });
+}
+
+/* ───── Landing page ───── */
+function renderLanding() {
+  const canvas = document.getElementById("canvas");
+  const totalWeekly = INDEX.filter(x=>x.kind==="weekly").length;
+  const totalPhysical = INDEX.filter(x=>x.kind==="physical").length;
+  const totalQ = INDEX.filter(x=>x.kind==="sidequest").length;
+
+  const landing = el("section", { class: "landing" });
+  landing.appendChild(el("div", { class: "eyebrow" }, "Alpha Odyssey · Summer 2026"));
+  landing.appendChild(el("h1", { html: "The full-length briefs.<br>One at a time.<br>Room to <em>breathe</em>." }));
+  landing.appendChild(el("p", { class: "lede" },
+    "Every workshop and physical challenge and mastery side quest, given the space it deserves. Open a brief from the index on the left — or click any card below. Use the ↗ Overview button to return to the four-up grid."
+  ));
+
+  const stats = el("div", { class: "stats" });
+  [[9,"Weeks"],[totalWeekly,"Weekly Workshops"],[totalPhysical,"Physical Challenges"],[totalQ,"Side Quests"]].forEach(([n,l])=>{
+    const s = el("div", { class: "stat" });
+    s.appendChild(el("div", { class: "n" }, String(n).padStart(2,"0")));
+    s.appendChild(el("div", { class: "l" }, l));
+    stats.appendChild(s);
+  });
+  landing.appendChild(stats);
+
+  // Grid of all weeks
+  ODYSSEY.weeks.forEach(w=>{
+    const wrap = el("div", { class: "landing-list" });
+    wrap.appendChild(el("h2", {},
+      el("small", {}, "Week " + String(w.week).padStart(2,"0")),
+      w.theme_title
+    ));
+    if (w.theme_subtitle) wrap.appendChild(el("div", { class: "sub" }, w.theme_subtitle));
+
+    const entries = (w.entries||[]);
+    const grid = el("div", { class: "ll-grid" });
+    sortByLevel(entries.filter(e=>normalizeTrack(e.track)==="weekly")).forEach(e=>{
+      grid.appendChild(landingCard(e, w));
+    });
+    sortByLevel(entries.filter(e=>normalizeTrack(e.track)==="physical")).forEach(e=>{
+      grid.appendChild(landingCard(e, w));
+    });
+    wrap.appendChild(grid);
+    landing.appendChild(wrap);
+  });
+
+  // Side quests grid
+  const sqWrap = el("div", { class: "landing-list" });
+  sqWrap.appendChild(el("h2", {},
+    el("small", {}, "Mastery · 53 quests"),
+    "Side Quests"
+  ));
+  sqWrap.appendChild(el("div", { class: "sub" },
+    "Self-paced, voluntary, tested on request. Pick by level below."
+  ));
+  const sqGrid = el("div", { class: "ll-grid" });
+  (ODYSSEY.sideQuests||[]).forEach(q=>{
+    const c = el("a", { class: "ll-card", href: "#/q/"+q.id });
+    const meta = el("div", { class: "meta" });
+    meta.appendChild(el("span", { class: "lvl" }, q.level));
+    meta.appendChild(el("span", {}, q.tier));
+    meta.appendChild(el("span", {}, q.type));
+    c.appendChild(meta);
+    c.appendChild(el("div", { class: "t" }, q.title));
+    if (q.tagline) c.appendChild(el("div", { class: "tl" }, q.tagline));
+    sqGrid.appendChild(c);
+  });
+  sqWrap.appendChild(sqGrid);
+  landing.appendChild(sqWrap);
+
+  canvas.innerHTML = "";
+  canvas.appendChild(landing);
+}
+function landingCard(e, w){
+  const c = el("a", { class: "ll-card", href: "#/b/"+e.id });
+  const meta = el("div", { class: "meta" });
+  meta.appendChild(el("span", { class: "lvl" }, e.level));
+  meta.appendChild(el("span", { class: "wk" }, "W" + String(w.week).padStart(2,"0")));
+  meta.appendChild(el("span", { class: normalizeTrack(e.track)==="physical"?"phy":"" },
+    normalizeTrack(e.track)==="physical" ? "Physical" : "Weekly"
+  ));
+  if (e.choice) meta.appendChild(el("span", {}, "Choice " + e.choice));
+  c.appendChild(meta);
+  c.appendChild(el("div", { class: "t" }, e.title));
+  if (e.tagline) c.appendChild(el("div", { class: "tl" }, e.tagline));
+  return c;
+}
+
+/* ───── Brief detail ───── */
+function renderBrief(id) {
+  const item = findById(id);
+  if (!item) { location.hash = ""; return; }
+  if (item.kind === "sidequest") { renderSideQuestBrief(item); return; }
+
+  const e = item.entry;
+  const canvas = document.getElementById("canvas");
+  canvas.innerHTML = "";
+
+  const article = el("article", { class: "brief" });
+  const body = el("div", { class: "brief-body" });
+  const rail = el("aside", { class: "rail" });
+
+  // Crumb
+  const crumb = el("div", { class: "crumb" });
+  crumb.appendChild(el("span", { class: "wk" }, "Week " + String(item.week).padStart(2,"0") + " · " + item.weekTitle));
+  crumb.appendChild(el("span", { class: "sep" }, "/"));
+  crumb.appendChild(el("span", { class: "trk" }, item.track === "physical" ? "Physical Challenge" : "Weekly Workshop"));
+  crumb.appendChild(el("span", { class: "sep" }, "/"));
+  crumb.appendChild(el("span", { class: "lvl" }, e.level + " · " + normalizeLevel(e.level_grade)));
+  if (e.choice) { crumb.appendChild(el("span", { class: "sep" }, "/")); crumb.appendChild(el("span", {}, "Choice " + e.choice)); }
+  body.appendChild(crumb);
+
+  // Kicker + Title
+  body.appendChild(el("div", { class: "brief-kicker" }, (item.track==="physical"?"Afternoon Session · 1.5 hrs":"Morning Workshop · 2 hrs")));
+  body.appendChild(el("h1", { class: "brief-title" }, e.title));
+  if (e.activity) body.appendChild(el("div", { class: "brief-activity" }, e.activity));
+
+  if (e.tagline) body.appendChild(el("div", { class: "brief-tagline" }, "“" + e.tagline + "”"));
+
+  // Narrative
+  if (e.narrative) {
+    const n = el("div", { class: "narrative-block" });
+    e.narrative.split(/\n\n+/).forEach(p => n.appendChild(el("p", {}, p)));
+    body.appendChild(n);
+  }
+
+  // Five-day plan
+  const days = normalizeDayPlan(e.day_plan);
+  if (days.length) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "Monday → Friday"));
+    sec.appendChild(el("h2", {}, "The Five-Day Plan"));
+    const ol = el("ol", { class: "days" });
+    days.forEach((d, i) => {
+      const li = el("li", {});
+      li.appendChild(el("div", { class: "d-meta" }, "Day " + (d.day || (i+1))));
+      if (d.title) li.appendChild(el("div", { class: "d-title" }, d.title));
+      if (d.detail) li.appendChild(el("div", { class: "d-detail" }, d.detail));
+      ol.appendChild(li);
+    });
+    sec.appendChild(ol);
+    body.appendChild(sec);
+  }
+
+  // Pass/fail
+  if (e.pass_test) {
+    const pb = el("div", { class: "pass-block" });
+    pb.appendChild(el("div", { class: "lbl" }, "Pass or Fail · Friday"));
+    pb.appendChild(el("h3", {}, "The Test"));
+    pb.appendChild(el("p", {}, e.pass_test));
+    body.appendChild(pb);
+  }
+
+  // Materials
+  const materials = normalizeMaterials(e.materials);
+  if (materials.length) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "Materials & Equipment"));
+    sec.appendChild(el("h2", {}, "What You Need"));
+    const ul = el("ul", { class: "bullets" });
+    materials.forEach(m => ul.appendChild(el("li", {}, m)));
+    sec.appendChild(ul);
+    body.appendChild(sec);
+  }
+
+  // Life skills
+  const skills = Array.isArray(e.life_skills) ? e.life_skills : [];
+  if (skills.length) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "Transferable Skills"));
+    sec.appendChild(el("h2", {}, "What You'll Actually Learn"));
+    const ul = el("ul", { class: "bullets" });
+    skills.forEach(s => ul.appendChild(el("li", {}, s)));
+    sec.appendChild(ul);
+    body.appendChild(sec);
+  }
+
+  // Hooks
+  if (e.kid_hook || e.parent_hook) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "Two Audiences, One Workshop"));
+    sec.appendChild(el("h2", {}, "Why This One"));
+    const row = el("div", { class: "hooks-row" });
+    if (e.kid_hook) {
+      const c = el("div", { class: "hook-card" });
+      c.appendChild(el("div", { class: "lbl" }, "Why the kid begs to do it"));
+      c.appendChild(el("p", {}, e.kid_hook));
+      row.appendChild(c);
+    }
+    if (e.parent_hook) {
+      const c = el("div", { class: "hook-card" });
+      c.appendChild(el("div", { class: "lbl" }, "Why the parent tells the dinner party"));
+      c.appendChild(el("p", {}, e.parent_hook));
+      row.appendChild(c);
+    }
+    sec.appendChild(row);
+    body.appendChild(sec);
+  }
+
+  // Prev/Next
+  body.appendChild(renderPrevNext(id));
+
+  // Rail — At a Glance
+  rail.appendChild(railBlock("Location", e.specific_venue || e.location || "—"));
+  if (e.joint_with) rail.appendChild(railBlock("Joint With", e.joint_with));
+  const staffLines = [];
+  if (e.instructors) staffLines.push(normalizeInstructors(e.instructors));
+  if (e.specialist_needed && e.specialist_role) staffLines.push("Specialist: " + e.specialist_role);
+  else if (e.specialist_needed === false) staffLines.push("No specialist required.");
+  if (e.guide_note) staffLines.push(e.guide_note);
+  rail.appendChild(railBlock("Staffing", staffLines.join(" ")));
+
+  if (typeof e.guide_can_lead === "boolean") {
+    rail.appendChild(railBlock("Alpha Guide Can Lead?", e.guide_can_lead ? "Yes — with specialist support as noted." : "No — specialist leads all instruction."));
+  }
+
+  article.appendChild(body);
+  article.appendChild(rail);
+  canvas.appendChild(article);
+  window.scrollTo({ top: 0 });
+}
+function railBlock(k, v) {
+  const b = el("div", { class: "block" });
+  b.appendChild(el("div", { class: "k" }, k));
+  b.appendChild(el("div", { class: "v" }, v));
+  return b;
+}
+
+/* ───── Side quest brief ───── */
+function renderSideQuestBrief(item) {
+  const q = item.entry;
+  const canvas = document.getElementById("canvas");
+  canvas.innerHTML = "";
+  const article = el("article", { class: "brief" });
+  const body = el("div", { class: "brief-body" });
+  const rail = el("aside", { class: "rail" });
+
+  const crumb = el("div", { class: "crumb" });
+  crumb.appendChild(el("span", { class: "wk" }, "Mastery Side Quest"));
+  crumb.appendChild(el("span", { class: "sep" }, "/"));
+  crumb.appendChild(el("span", { class: "lvl" }, q.level + " · " + normalizeLevel(q.level_grade)));
+  body.appendChild(crumb);
+
+  body.appendChild(el("div", { class: "brief-kicker" },
+    "Voluntary · Self-paced · Tested on request"
+  ));
+
+  const head = el("div", {});
+  head.appendChild(el("h1", { class: "brief-title" }, q.title));
+  const tagRow = el("div", {});
+  const tierPill = el("span", { class: "sq-tier-pill " + String(q.tier).toLowerCase() }, q.tier + (q.time ? " · " + q.time : ""));
+  tagRow.appendChild(tierPill);
+  tagRow.appendChild(el("span", { class: "sq-tier-pill" }, q.type));
+  head.appendChild(tagRow);
+  body.appendChild(head);
+
+  if (q.tagline) body.appendChild(el("div", { class: "brief-tagline" }, "“" + q.tagline + "”"));
+
+  if (q.description) {
+    const n = el("div", { class: "narrative-block" });
+    n.appendChild(el("p", {}, q.description));
+    body.appendChild(n);
+  }
+
+  if (q.kid_instructions) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "What the counselor says"));
+    sec.appendChild(el("h2", {}, "When you sign up"));
+    sec.appendChild(el("div", { class: "sq-quote" }, q.kid_instructions));
+    body.appendChild(sec);
+  }
+
+  if (q.what_to_build) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "The Artifact"));
+    sec.appendChild(el("h2", {}, "What You'll Build"));
+    const p = el("p", { class: "" }, q.what_to_build);
+    p.style.fontSize = "17px"; p.style.color = "var(--ink-dim)"; p.style.maxWidth = "66ch"; p.style.lineHeight = "1.6";
+    sec.appendChild(p);
+    body.appendChild(sec);
+  }
+
+  const approach = Array.isArray(q.approach) ? q.approach : [];
+  if (approach.length) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "The Path"));
+    sec.appendChild(el("h2", {}, "How to Approach It"));
+    const ol = el("ol", { class: "days" });
+    approach.forEach((step, i) => {
+      const li = el("li", {});
+      li.appendChild(el("div", { class: "d-meta" }, "Step " + (i+1)));
+      li.appendChild(el("div", { class: "d-detail" }, step));
+      ol.appendChild(li);
+    });
+    sec.appendChild(ol);
+    body.appendChild(sec);
+  }
+
+  if (q.pass_criteria) {
+    const pb = el("div", { class: "pass-block" });
+    pb.appendChild(el("div", { class: "lbl" }, "Pass / Fail"));
+    pb.appendChild(el("h3", {}, "Pass Criteria"));
+    pb.appendChild(el("p", {}, q.pass_criteria));
+    body.appendChild(pb);
+  }
+
+  const materials = normalizeMaterials(q.materials);
+  if (materials.length) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "Materials"));
+    sec.appendChild(el("h2", {}, "What You Need"));
+    const ul = el("ul", { class: "bullets" });
+    materials.forEach(m => ul.appendChild(el("li", {}, m)));
+    sec.appendChild(ul);
+    body.appendChild(sec);
+  }
+
+  if (q.counselor_notes) {
+    const sec = el("div", { class: "section" });
+    sec.appendChild(el("div", { class: "section-label" }, "For the Counselor"));
+    sec.appendChild(el("h2", {}, "Watch For"));
+    const p = el("p", {}, q.counselor_notes);
+    p.style.fontSize = "17px"; p.style.color = "var(--ink-dim)"; p.style.maxWidth = "66ch"; p.style.lineHeight = "1.55";
+    sec.appendChild(p);
+    body.appendChild(sec);
+  }
+
+  body.appendChild(renderPrevNext(q.id));
+
+  rail.appendChild(railBlock("Tier", q.tier + (q.time ? " · " + q.time : "")));
+  rail.appendChild(railBlock("Type", q.type));
+  rail.appendChild(railBlock("Level", q.level + " · " + normalizeLevel(q.level_grade)));
+  if (q.counselor_notes) rail.appendChild(railBlock("Counselor Note", q.counselor_notes));
+
+  article.appendChild(body);
+  article.appendChild(rail);
+  canvas.appendChild(article);
+  window.scrollTo({ top: 0 });
+}
+
+/* ───── Prev/Next within the same kind ───── */
+function renderPrevNext(currentId) {
+  const row = el("div", { class: "pn-nav" });
+  // Find all items of same kind
+  const current = findById(currentId);
+  const peers = INDEX.filter(x => {
+    if (current.kind === "sidequest") return x.kind === "sidequest";
+    return x.kind === "weekly" || x.kind === "physical";
+  });
+  const i = peers.findIndex(x => x.id === currentId);
+  const prev = i > 0 ? peers[i - 1] : null;
+  const next = i < peers.length - 1 ? peers[i + 1] : null;
+
+  const prevBtn = el("button", {
+    class: "pn",
+    "data-disabled": prev ? "false" : "true",
+    onclick: () => { if (prev) location.hash = (prev.kind === "sidequest" ? "#/q/" : "#/b/") + prev.id; }
+  });
+  prevBtn.appendChild(el("div", { class: "dir" }, "← Previous"));
+  prevBtn.appendChild(el("div", { class: "t" }, prev ? prev.title : "The start"));
+  row.appendChild(prevBtn);
+
+  const nextBtn = el("button", {
+    class: "pn pn-next",
+    "data-disabled": next ? "false" : "true",
+    onclick: () => { if (next) location.hash = (next.kind === "sidequest" ? "#/q/" : "#/b/") + next.id; }
+  });
+  nextBtn.appendChild(el("div", { class: "dir" }, "Next →"));
+  nextBtn.appendChild(el("div", { class: "t" }, next ? next.title : "The end"));
+  row.appendChild(nextBtn);
+
+  return row;
+}
+
+/* ───── Router ───── */
+function route() {
+  const h = location.hash || "";
+  const m = h.match(/^#\/(b|q)\/(.+)$/);
+  if (m) renderBrief(m[2]);
+  else renderLanding();
+  highlightActive();
+  // close drawer on mobile
+  document.getElementById("drawer").classList.remove("open");
+}
+
+/* ───── Boot ───── */
+window.addEventListener("DOMContentLoaded", () => {
+  ODYSSEY.weeks.sort((a,b) => a.week - b.week);
+  buildIndex();
+  renderNav();
+  route();
+  window.addEventListener("hashchange", route);
+});
+</script>
+</body>
+</html>
