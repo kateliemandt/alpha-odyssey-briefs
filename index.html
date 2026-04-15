@@ -595,7 +595,13 @@ article.brief, section.landing { animation: fade .45s ease both; }
 </head>
 <body>
 
-<button class="hamburger" onclick="document.querySelector('aside.drawer').classList.toggle('open')">☰ Index</button>
+<!-- Top site-switcher bar -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:102;background:rgba(11,29,44,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:8px 18px;display:flex;align-items:center;justify-content:space-between;">
+  <span style="font-family:var(--font-display);font-size:18px;color:var(--gold);">Alpha Odyssey · <span style="color:var(--cream);">Briefs</span></span>
+  <a href="https://kateliemandt.github.io/alpha-odyssey-overview/" style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--navy);padding:6px 12px;background:var(--gold);border:1px solid var(--gold);border-radius:2px;border-bottom:1px solid var(--gold);font-weight:700;">↗ Overview Grid</a>
+</div>
+
+<button class="hamburger" style="top:52px;" onclick="document.querySelector('aside.drawer').classList.toggle('open')">☰ Index</button>
 
 <div class="app">
   <aside class="drawer" id="drawer">
@@ -615,7 +621,7 @@ article.brief, section.landing { animation: fade .45s ease both; }
 </div>
 
 <div class="util-row">
-  <a class="util-btn" href="https://kateliemandt.github.io/alpha-odyssey-overview/">↗ Overview</a>
+  <a class="util-btn" href="https://kateliemandt.github.io/alpha-odyssey-overview/" style="background:var(--gold);color:var(--navy);font-weight:700;">↗ Overview Grid</a>
   <button class="util-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
 </div>
 
@@ -877,7 +883,7 @@ function renderBrief(id) {
   body.appendChild(crumb);
 
   // Kicker + Title
-  body.appendChild(el("div", { class: "brief-kicker" }, (item.track==="physical"?"Afternoon Session · 1.5 hrs":"Morning Workshop · 2 hrs")));
+  body.appendChild(el("div", { class: "brief-kicker" }, (item.track==="physical"?"Afternoon · 45 min/day · 3.75 hrs/week":"Afternoon Workshop · ~2 hrs/day · 8 hrs/week")));
   body.appendChild(el("h1", { class: "brief-title" }, e.title));
   if (e.activity) body.appendChild(el("div", { class: "brief-activity" }, e.activity));
 
