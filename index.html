@@ -884,7 +884,7 @@ function renderBrief(id) {
   body.appendChild(crumb);
 
   // Kicker + Title
-  body.appendChild(el("div", { class: "brief-kicker" }, (item.track==="physical"?"Afternoon · 45 min/day · 3.75 hrs/week":"Afternoon Workshop · ~2 hrs/day · 8 hrs/week")));
+  body.appendChild(el("div", { class: "brief-kicker" }, (item.track==="physical"?"Afternoon · 45 min/day":"Morning Workshop · ~2 hrs/day")));
   body.appendChild(el("h1", { class: "brief-title" }, e.title));
   if (e.activity) body.appendChild(el("div", { class: "brief-activity" }, e.activity));
 
